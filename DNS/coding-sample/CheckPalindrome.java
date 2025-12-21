@@ -1,4 +1,9 @@
-
+/**
+ * @Author: Ravi Ramesh Mukkavilli
+ * @Date: 10/15/2020
+ * TC : O(n)
+ * SC : O(1)
+ */
 class CheckPalindrome {
     public static void main(String[] args) {
         String s = "A man, a plan, a canal: Panama";
