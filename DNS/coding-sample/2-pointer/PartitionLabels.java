@@ -9,6 +9,10 @@
 // Return a list of integers representing the sizes of these partitions.
 //  ** /
 import java.util.*;
+/**
+ * TC : O(n)
+ * SC : O(1)
+ */
 class PartitionLabels {
     public static void main(String args[]) {
         String a = "bcbcdd";
