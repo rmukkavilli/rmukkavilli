@@ -6,7 +6,10 @@ class StringCompression {
         char[] ar = a.toCharArray();
         System.out.println(stringCompress(ar));
     }
-
+/**
+ * O(n)
+ * O(1)
+ */
     public static int stringCompress(char[] ar) {
         int i = 0;
         int count = 0;
