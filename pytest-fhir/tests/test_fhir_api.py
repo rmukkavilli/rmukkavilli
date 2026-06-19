@@ -3,7 +3,7 @@ import pytest
 
 class TestFhir:
     @pytest.mark.api_test
-    def test_patient(self, fhir_client):
+    def test_patient(self, fhir_client, log_info):
         patient = "131707439"
         response = fhir_client.get_patient(patient)
         assert response.status_code == 200
@@ -20,6 +20,7 @@ class TestFhir:
         assert "Spanish" in  patient_res["communication"][0]["language"]["coding"][0].values()
         for c in patient_res.get("communication", []):
             assert c["language"]["coding"][0]["code"] == "es"
+        log_info.info("where is my message ")
        
         
 
