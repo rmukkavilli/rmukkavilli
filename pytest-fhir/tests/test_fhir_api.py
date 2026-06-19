@@ -1,6 +1,8 @@
 import requests
+import pytest
 
 class TestFhir:
+    @pytest.mark.api_test
     def test_patient(self, fhir_client):
         patient = "131707439"
         response = fhir_client.get_patient(patient)
@@ -17,7 +19,7 @@ class TestFhir:
         assert patient_res["communication"][0]["language"]["text"] == "Spanish"
         assert "Spanish" in  patient_res["communication"][0]["language"]["coding"][0].values()
         for c in patient_res.get("communication", []):
-            assert c["language"]["coding"][0]["code"]== "es"
+            assert c["language"]["coding"][0]["code"] == "es"
        
         
 
