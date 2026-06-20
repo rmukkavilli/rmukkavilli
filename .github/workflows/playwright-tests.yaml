@@ -9,15 +9,14 @@ on:
 
 jobs:
   ui-tests:
-
     runs-on: ubuntu-latest
+    timeout-minutes: 60  # ✅ Add timeout
 
     defaults:
       run:
         working-directory: playwright-demo
 
     steps:
-
     - name: Checkout repository
       uses: actions/checkout@v4
 
@@ -33,8 +32,15 @@ jobs:
 
     - name: Install Playwright browser
       run: |
-        playwright install --with-deps chromium
+        python -m playwright install --with-deps chromium  # ✅ Fixed
 
     - name: Run tests
       run: |
-        pytest test -v
+        pytest test -v --timeout=30  # ✅ Add timeout
+
+    - name: Upload test artifacts
+      if: ${{ !cancelled() }}
+      uses: actions/upload-artifact@v5
+      with:
+        name: playwright-traces
+        path: playwright-demo/test-results/  # ✅ Include working-directory path
