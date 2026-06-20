@@ -1,6 +1,6 @@
 def move_zeros(list):
     left = 0
-    right = 1
+    right = 0
     while left < len(list) and right < len(list):
         if list[left] == 0 and list[right] != 0:
             temp = list[left]
@@ -11,5 +11,5 @@ def move_zeros(list):
         print(right)
     return list
 
-l = [1,2,0,0]
+l = [0, 0, 1,2, 0]
 print(move_zeros(l))
