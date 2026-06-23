@@ -1,5 +1,5 @@
-#Time = O(n * k log k)
-Space = O(n * k)
+#Time = O(n * k log k) -
+# Space = O(n * k)
 def group_anagram(anagrams):
     group = {}
     for anagram in anagrams:

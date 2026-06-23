@@ -1,0 +1,41 @@
+longest_substring_without_repeat
+The step-by-step table for "AABABBA" with k = 1.
+
+Table
+right	char	count in window	max_frequency	window	replacements needed	valid?	answer
+0	A	1	1	A	0	yes	1
+1	A	2	2	AA	0	yes	2
+2	B	1	2	AAB	1	yes	3
+3	A	3	3	AABA	1	yes	4
+4	B	2	3	AABAB	2	no, shrink	4
+5	B	2	3	ABABB	2	no, shrink	4
+6	A	2	3	BABBA	2	no, shrink	4
+What is happening
+At each step:
+
+we add the new character on the right,
+
+update the frequency counts,
+
+compute how many replacements are needed,
+
+if replacements needed are more than k, we shrink from the left,
+
+then we keep the longest valid window seen so far.
+
+Important note
+max_frequency is the count of the most common character in the current window.
+The window is valid when:
+
+window size - max_frequency <= k
+
+For this input, the longest valid window length is 4.
+
+Final intuition
+The best window here is something like:
+
+"AABA" → change one B to A
+
+or "ABBB" after rebalancing in a later window
+
+So the answer becomes 4
