@@ -5,7 +5,6 @@ def get_average_sum(nums, k):
     for val in nums[0:k]:
         window_sum +=val
     for val in range(k, len(nums)):
-        print(val)
         window_sum += nums[val] - nums[val-k]
         max_window_sum = max(max_window_sum, window_sum)
     return max_window_sum
