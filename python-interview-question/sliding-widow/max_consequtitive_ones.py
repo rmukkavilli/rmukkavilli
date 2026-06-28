@@ -1,0 +1,1 @@
+def max_consequetive_ones(nums, k)

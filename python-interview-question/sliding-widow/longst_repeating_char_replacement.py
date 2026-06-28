@@ -22,6 +22,7 @@ def longest_substring_replace(s, k):
         count[s[right]] = count.get(s[right], 0)+1
         # is only to calculate whats the max frequency number at current window.
         max_frequency = max(count[s[right]], max_frequency)
+        # right -left +1 is window size - max_freq ie, 5 - 3 = 2 > k(1)
         while (right - left +1)  - max_frequency > k:
             count[s[left]] -= 1
             left +=1
