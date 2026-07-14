@@ -2,11 +2,20 @@ import pytest
 import requests
 import logging
 from api_client import FHIRClient
+from token_manager import TokenManager
+import os
 
-@pytest.fixture
-def fhir_client():
-    return FHIRClient()
+@pytest.fixture(scope="session")
+def fhir_client(token_manager : TokenManager):
+    base_url = os.getenv(
+      "FHIR_BASE_URL",
+      "https://hapi.fhir.org/baseR4",
+    )
+    return FHIRClient(base_url = base_url, token_manager = token_manager,)
 
+@pytest.fixture(scope="session")
+def token_manager() -> TokenManager:
+  return TokenManager()
     
 @pytest.fixture(scope="session")
 def log_info():

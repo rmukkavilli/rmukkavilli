@@ -26,9 +26,10 @@ class TestFhir:
 
         assert patient_res["id"] == patient
 
-    def test_search_by_family_name(self):
-        patient_id="1234"
-        response = requests.get(f"{BASE_URL}/patient/{patient_id}", params={"family":"smith"})
+    def test_search_by_family_name(self,fhir_client, log_info):
+        patient_id="131707439"
+        response = fhir_client.search_patient_by_family(patient_id)
+        #response = requests.get(f"{BASE_URL}/patient/{patient_id}", params={"family":"smith"})
 
         assert response.status_code ==200
         resp = response.json()
