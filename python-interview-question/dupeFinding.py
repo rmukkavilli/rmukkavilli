@@ -1,12 +1,13 @@
 def dupe_find(nums):
     # nums = [1,2,3,4]
+    left = 0
     seen= set()
     for num in nums:
-        if num in seen:
-            return True
-        else:
-            seen.add(num)
-    return False
+        while num in seen:
+            seen.remove(num)
+        seen.add(num)
+    print(seen)
+    return len(seen)
 
-nums = [1,2,3,4]
+nums = [2,2,3]
 print(dupe_find(nums))

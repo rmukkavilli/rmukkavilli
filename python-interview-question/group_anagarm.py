@@ -4,10 +4,11 @@ def group_anagram(anagrams):
     group = {}
     for anagram in anagrams:
         key = ''.join(sorted(anagram))
+        print(key)
         if key not in group:
             group[key] =[]
         group[key].append(anagram)
-    return list(group.values()) 
+    return group
 
 
 

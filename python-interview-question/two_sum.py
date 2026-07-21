@@ -1,3 +1,4 @@
+# Spnace :O(N) and O(1) and use enumerate.
 def two_sum(nums,target):
     index ={}
     i = 0

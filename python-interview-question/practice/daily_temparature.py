@@ -10,5 +10,6 @@ def daily_temperatures(temperatures: list[int]) -> list[int]:
     return res
 
 
-temperatures = [73,74,75,71,69,72,76,73]
+#temperatures = [73,74,75,71,69,72,76,73]
+temperatures = [120,100,150, 90,200]
 print(daily_temperatures(temperatures))
