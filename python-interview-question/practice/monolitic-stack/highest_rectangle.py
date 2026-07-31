@@ -2,12 +2,14 @@ def get_highest_rectange(list) -> int:
     stack = []
     max_val = 0
     for i, num in enumerate(list):
-        start  = i
+        start  = i    
         while stack and stack[-1][1] > num:
             prev_index, prev_hieght = stack.pop()
             width = i - prev_index
+            print("Widnth", width)
             max_val = max(max_val, prev_hieght*width)
             start = prev_index
+            print("start", start, "num", num)
         stack.append((start, num))
     # remaining left off eleemnts
     for start, hieght in stack:
@@ -19,5 +21,5 @@ def get_highest_rectange(list) -> int:
 
 list = [2, 1, 5, 6, 2, 3]
 print(get_highest_rectange([2, 1, 5, 6, 2, 3]))     # 10
-print(get_highest_rectange([2, 1, 2]))              # 3
-print(get_highest_rectange([2, 2]))                 # 4
+# print(get_highest_rectange([2, 1, 2]))              # 3
+# print(get_highest_rectange([2, 2]))                 # 4

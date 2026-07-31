@@ -1,0 +1,67 @@
+def detect_flaky_tests(logs: list[dict]) -> list[str]:
+    flaky_dict:dict[str,set[str]] = {}
+    for log in logs:
+        if not isinstance(log, dict):
+            continue
+        test_val = log.get("test")
+        status = log.get("status")
+        
+        if not test_val or status not in {"PASS", "FAIL"}:
+            continue
+        
+        if test_val not in flaky_dict:
+            flaky_dict[test_val] = set()
+        flaky_dict[test_val].add(status)
+
+    return [key for key, error in flaky_dict.items() 
+           if "FAIL" in error and "PASS" in error]
+logs = [
+    {"test": "LoginTest", "status": "PASS"},
+    {"test": "LoginTest", "status": "FAIL"},
+    {"test": "LoginTest", "status": "PASS"},
+    {"test": "PaymentTest", "status": "PASS"},
+    {"test": "PaymentTest", "status": "PASS"},
+    {"test": "CameraTest", "status": "FAIL"},
+    {"test": "CameraTest", "status": "FAIL"},
+    {"test": "123"},
+    {"test": "123"},
+    {"test": "123"}
+
+]
+
+print(detect_flaky_tests(logs))
+
+
+def empty_logs():
+    logs = []
+    res = detect_flaky_tests(logs)
+    assert res == []
+
+def invalid_logs():
+    logs = [
+    {"Abc": "LoginTest", "cav": "PASS"}
+    ] 
+    res = detect_flaky_tests(logs)
+    assert res == []
+def unknown_status():
+    logs = [
+        {"test": "123", "status": "UNKNOWN"},
+        {"test": "123", "status": "FAIL"},
+    ]
+    res = detect_flaky_tests(logs)
+    assert res == []
+def mixed_status():
+    logs = [
+    {"test": "123", "status": "UNKNOWN"},
+    {"test": "123", "status": "FAIL"},
+    {"test": "123", "status": "PASS"},
+    ]
+    res = detect_flaky_tests(logs)
+    assert res == ['123']
+def missing_values():
+    logs = [
+    {"test": "123", "status": None},
+    {"test": "123"},
+    ]
+    res = detect_flaky_tests(logs)
+    assert res == []

@@ -22,10 +22,10 @@ def min_substring(s, t):
             count[s[left]] -=1
             if count[s[left]] == 0:
                 del count[s[left]]
-#            min_count = min(min_count, right-left +1)
+            # min_count = min(min_count, right-left +1)
             left +=1
-    return min_count
-
+    print(min_count)
+    print(s[left:right+1])
 
 s = "ADOBECODEBANC"
 t = "ABC"
