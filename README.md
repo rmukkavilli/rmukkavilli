@@ -1,15 +1,15 @@
 ### 👋 Hi, I'm @rmukkavilli
- 
-- 🧪 Senior SDET / test automation engineer with 22+ years of experience across API, mobile, and platform testing (Verily, Google Play Books, and others)
-- 👀 Currently exploring the transition from SDET into backend software engineering
-- 🌱 Learning backend engineering fundamentals in Python, and how to build and evaluate agentic AI tooling for engineering teams
-- 💞️ Looking to collaborate on projects at the intersection of test automation and AI-assisted engineering workflows
-- 📫 Reach me via GitHub
----
-  
-### Other projects in this repo
- 
-- [`pytest-fhir`](./pytest-fhir) — Pytest-based FHIR API integration tests
+
+- 🧪 Senior SDET and software quality engineer with extensive experience in Python, API automation, mobile, backend integrations, CI/CD, and healthcare platforms.
+- 💻 Expanding my engineering focus into backend software development, building APIs and services with Python, FastAPI, PostgreSQL, and modern backend patterns.
+- 🤖 Exploring AI-assisted and agentic engineering workflows, with an interest in applying AI to developer productivity, testing, and software reliability.
+- 🔧 I enjoy building automation frameworks, API infrastructure, developer tooling, and reliable end-to-end systems.
+- 💞️ Open to collaborating on backend, test infrastructure, healthcare technology, and AI-assisted engineering projects.
+
+### Projects
+
+- [`clinical-screening-api`](./clinical-screening-api) — Python/FastAPI/PostgreSQL backend for clinical screening workflows
+- [`pytest-fhir`](./pytest-fhir) — Pytest-based FHIR API integration framework
 - [`playwright-demo`](./playwright-demo) — Playwright automation examples
-- [`Authentication`](./Authentication) / [`DNS`](./DNS) — infrastructure and tooling notes
-- [`python-interview-question`](./python-interview-question) — Python interview practice
+- [`Authentication`](./Authentication) / [`DNS`](./DNS) — infrastructure and engineering notes
+- [`python-interview-question`](./python-interview-question) — Python algorithms and engineering exercises
