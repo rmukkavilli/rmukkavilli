@@ -1,55 +1,54 @@
-import requests
-import pytest
 import time
+
+import pytest
+
+
+def patient_ids_from_bundle(bundle: dict) -> set[str]:
+    return {
+        entry.get("resource", {}).get("id")
+        for entry in bundle.get("entry", [])
+        if entry.get("resource", {}).get("resourceType") == "Patient"
+    }
+
+
 class TestFhir:
-    def _wait_until(self, endpoint,fhir_client,log_info, timeout=20):
-        deadline = time.time() + timeout
-        while (time.time() < deadline):
-            res = fhir_client.get(endpoint)
-            if res.status_code != 200:
-                raise ValueError(f"invalid response check response, {res.status_code}")
-            data = response.json()
-
-            if data.status == "completed":
-                return res
-            time.sleep(5)
-
-        raise ValueError(f"timed out not updated status as completed {data}")
-
     @pytest.mark.api_test
-    def test_patient(self, fhir_client, log_info):
-        patient_id = os.environ["FHIR_TEST_PATIENT_ID"]
+    def test_patient(self, fhir_client, created_patient):
+        patient_id = created_patient["id"]
 
         response = fhir_client.get_patient(patient_id)
 
         assert response.status_code == 200, (
-            f"Patient lookup returned {response.status_code}"
+            f"Patient lookup returned HTTP {response.status_code}"
         )
 
         patient = response.json()
 
         assert patient["resourceType"] == "Patient"
         assert patient["id"] == patient_id
+        assert patient["name"][0]["family"] == created_patient["family_name"]
 
-    def test_search_by_family_name(self,fhir_client, log_info):
-        patient_id="131707439"
-        response = fhir_client.search_patient_by_family(patient_id)
-        #response = requests.get(f"{BASE_URL}/patient/{patient_id}", params={"family":"smith"})
+    @pytest.mark.api_test
+    def test_search_by_family_name(self, fhir_client, created_patient):
+        patient_id = created_patient["id"]
+        family_name = created_patient["family_name"]
 
-        assert response.status_code ==200
-        resp = response.json()
-        print(resp)
-    
-    def _refresh_auth_header(self) -> None:
-    self.session.headers.pop("Authorization", None)
-    self.session.headers.update(
-        self.token_manager.get_authorization_header()
-    )
+        for attempt in range(5):
+            response = fhir_client.search_patient_by_family(family_name)
 
-    def get_patient(self, patient_id: str) -> requests.Response:
-        self._refresh_auth_header()
+            assert response.status_code == 200, (
+                f"Patient search returned HTTP {response.status_code}"
+            )
 
-        return self.session.get(
-            f"{self.base_url}/Patient/{patient_id}",
-            timeout=self.timeout,
+            bundle = response.json()
+            assert bundle["resourceType"] == "Bundle"
+
+            if patient_id in patient_ids_from_bundle(bundle):
+                return
+
+            if attempt < 4:
+                time.sleep(1)
+
+        pytest.fail(
+            "Created Patient did not appear in family-name search results"
         )
