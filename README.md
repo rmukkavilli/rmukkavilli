@@ -8,7 +8,7 @@
 
 ### Projects
 
-- [`clinical-screening-api`](./clinical-screening-api) — Python/FastAPI/PostgreSQL backend for clinical screening workflows
+- [`clinical-screening-api`]([./clinical-screening-api](https://github.com/rmukkavilli/clinical-screening-api)) — Python/FastAPI/PostgreSQL backend for clinical screening workflows
 - [`pytest-fhir`](./pytest-fhir) — Pytest-based FHIR API integration framework
 - [`playwright-demo`](./playwright-demo) — Playwright automation examples
 - [`Authentication`](./Authentication) / [`DNS`](./DNS) — infrastructure and engineering notes
